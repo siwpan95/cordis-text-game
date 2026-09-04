@@ -1,11 +1,6 @@
 import { Context, Service } from 'cordis'
 import type { Choice } from './renderer'
-
-/** 方向英文 -> 中文标签（含简写） */
-const DIR_LABEL: Record<string, string> = {
-  north: '北', south: '南', east: '东', west: '西', up: '上', down: '下',
-  n: '北', s: '南', e: '东', w: '西', u: '上', d: '下',
-}
+import { dirLabel } from './directions'
 
 /**
  * ChoiceUI：可点击行动选项服务（ctx.choices）。
@@ -33,7 +28,7 @@ export class ChoiceUI extends Service {
 
     // 移动：当前房间的每个出口
     for (const dir of Object.keys(room?.exits ?? {})) {
-      choices.push({ group: '移动', label: `向${DIR_LABEL[dir] ?? dir}走`, command: `go ${dir}` })
+      choices.push({ group: '移动', label: `向${dirLabel(dir)}走`, command: `go ${dir}` })
     }
     // 拾取：当前房间地上「拿得起来」的物品（如铁箱拿不动，就不给按钮）
     for (const id of world.getRoomItems(world.currentRoom)) {

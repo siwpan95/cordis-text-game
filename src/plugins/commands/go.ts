@@ -1,4 +1,5 @@
 import type { Context } from 'cordis'
+import { dirLabel } from '../../core/directions'
 
 /**
  * go 指令插件：前往某个方向。
@@ -24,7 +25,7 @@ export const goCommand = {
           ctx.renderer.print(r.reason!)
           return
         }
-        ctx.renderer.print(`你向${dir}走去……`)
+        ctx.renderer.print(`你向${dirLabel(dir)}走去……`)
         await ctx.commands.dispatch('look')
       },
     }))

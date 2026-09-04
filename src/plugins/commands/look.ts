@@ -1,4 +1,5 @@
 import type { Context } from 'cordis'
+import { dirLabel } from '../../core/directions'
 
 /**
  * look 指令插件：环顾四周。
@@ -29,7 +30,7 @@ export const lookCommand = {
           lines.push('地上：' + items.map((id) => ctx.world.getItem(id)?.name ?? id).join('、'))
         }
         const exits = room.exits ? Object.keys(room.exits) : []
-        lines.push('出口：' + (exits.length ? exits.join('、') : '无'))
+        lines.push('出口：' + (exits.length ? exits.map(dirLabel).join('、') : '无'))
 
         // 交给其它插件补充 / 改写描述
         await ctx.parallel('room/describe', { roomId: room.id, lines })
