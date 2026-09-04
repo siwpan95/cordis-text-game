@@ -12,12 +12,12 @@ export const goCommand = {
     ctx.effect(() => ctx.commands.register({
       name: 'go',
       description: '前往某个方向',
-      usage: 'go <north|south|east|west|up|down>',
+      usage: 'go <方向>（北/南/东/西/上/下）',
       aliases: ['move', 'walk'],
       async run(args: string[]) {
         const dir = args[0]
         if (!dir) {
-          ctx.renderer.print('用法：go <方向>（north/south/east/west/up/down，或 n/s/e/w/u/d）')
+          ctx.renderer.print('用法：go <方向>（北/南/东/西/上/下，或 n/s/e/w/u/d）')
           return
         }
         const r = ctx.world.moveTo(dir)

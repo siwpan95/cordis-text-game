@@ -88,9 +88,12 @@ export class WebRenderer extends Service implements Renderer {
   /** 鼠标可点：把选项渲染成按钮，点一下即等价于输入该指令 */
   async choose(question: string, choices: Choice[]): Promise<string> {
     this.print(question)
+    // 命令 → 中文标签 映射，供点击按钮后回显中文（而非英文指令）
+    const cmdToLabel = new Map<string, string>()
     if (this.actions) {
       let lastGroup: string | undefined
       for (const c of choices) {
+        cmdToLabel.set(c.command, c.label)
         // 分组变化时插一个分组标题（如「移动」「拾取」）
         if (c.group && c.group !== lastGroup) {
           const tag = document.createElement('span')
@@ -113,7 +116,11 @@ export class WebRenderer extends Service implements Renderer {
     }
     const value = await this.awaitInput()
     this.clearActions()
-    if (value) this.print(`> ${value}`)
+    if (value) {
+      // 点按钮进来的 value 是英文指令，回显对应的中文标签；手动输入的则原样回显
+      const echo = cmdToLabel.get(value) ?? value
+      this.print(`> ${echo}`)
+    }
     return value
   }
 
