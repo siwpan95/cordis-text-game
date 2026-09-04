@@ -1,0 +1,25 @@
+{
+  "name": "cordis-text-game",
+  "version": "0.1.0",
+  "description": "Everything-is-a-plugin text adventure engine built on Cordis",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "tsx src/index.ts",
+    "dev": "tsx watch src/index.ts",
+    "smoke": "tsx src/smoke.ts",
+    "e2e": "node scripts/e2e-terminal.mjs",
+    "build": "tsc -p tsconfig.json",
+    "build:web": "esbuild src/web.ts --bundle --format=esm --platform=browser --target=es2022 --outfile=public/game.js",
+    "web": "npm run build:web && node scripts/serve.mjs"
+  },
+  "dependencies": {
+    "cordis": "4.0.0-rc.9"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "esbuild": "^0.24.0",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2"
+  }
+}
