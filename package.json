@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "description": "Everything-is-a-plugin text adventure engine built on Cordis",
   "type": "module",
-  "private": true,
+  "license": "MIT",
   "scripts": {
     "start": "tsx src/index.ts",
     "dev": "tsx watch src/index.ts",
